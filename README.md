@@ -18,36 +18,22 @@ Whether you're a student, professional, or tech enthusiast, DevEvent makes event
 ---
 ### ✨ Features
 
-🌐 Global developer event discovery
-📅 Event listing with date, location, and type
-🔍 Search and filter events by category or tech stack
-🧑‍💻 Community-driven event sharing
-⚡ Fast and SEO-friendly Next.js architecture
-📱 Fully responsive design
+🌐 Global developer event discovery <br> 
+📅 Event listing with date, location, and type <br>
+🔍 Search and filter events by category or tech stack <br>
+🧑‍💻 Community-driven event sharing <br>
+⚡ Fast and SEO-friendly Next.js architecture <br>
+📱 Fully responsive design <br>
 
 ---
 ### 🛠️ Tech Stack
 
 **Framework**: Next.js <br>
-**Frontend**: React, HTML, CSS
-**Styling**: CSS / Tailwind (if applicable)
-**Backend**: API routes / External APIs (optional)
-**Database**: (Planned / Optional)
-**Deployment**: Vercel / Netlify
-
----
-### 📁 Project Structure
-
-DevEvent/
-├── app/                # App router (Next.js)
-├── components/         # Reusable UI components
-├── pages/              # Pages (if using pages router)
-├── public/             # Static assets
-├── styles/             # Global styles
-├── utils/              # Helper functions
-├── package.json
-├── next.config.js
-└── README.md
+**Frontend**: React, HTML, CSS <br>
+**Styling**: CSS / Tailwind (if applicable) <br>
+**Backend**: API routes / External APIs (optional) <br>
+**Database**: (Planned / Optional) <br>
+**Deployment**: Vercel / Netlify <br>
 
 ---
 ### 🚀 Getting Started
