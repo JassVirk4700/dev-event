@@ -1,36 +1,103 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# DevEvent 🚀
 
-## Getting Started
+DevEvent is a Next.js-based web platform to discover, share, and explore developer events from around the world.
+It helps developers stay updated with hackathons, conferences, meetups, workshops, and online tech events across different domains.
 
-First, run the development server:
+![DevEvent Demo](./public/demo.png)
 
-```bash
+### 🌍 What is DevEvent?
+
+DevEvent is built for developers who want a single place to:
+- Discover upcoming developer events worldwide
+- Share events with the community
+- Explore events by category, tech stack, or location
+- Stay connected with the global developer ecosystem
+
+Whether you're a student, professional, or tech enthusiast, DevEvent makes event discovery simple and organized.
+
+---
+### ✨ Features
+
+🌐 Global developer event discovery
+📅 Event listing with date, location, and type
+🔍 Search and filter events by category or tech stack
+🧑‍💻 Community-driven event sharing
+⚡ Fast and SEO-friendly Next.js architecture
+📱 Fully responsive design
+
+---
+### 🛠️ Tech Stack
+
+**Framework**: Next.js
+**Frontend**: React, HTML, CSS
+**Styling**: CSS / Tailwind (if applicable)
+**Backend**: API routes / External APIs (optional)
+**Database**: (Planned / Optional)
+**Deployment**: Vercel / Netlify
+
+---
+### 📁 Project Structure
+
+DevEvent/
+├── app/                # App router (Next.js)
+├── components/         # Reusable UI components
+├── pages/              # Pages (if using pages router)
+├── public/             # Static assets
+├── styles/             # Global styles
+├── utils/              # Helper functions
+├── package.json
+├── next.config.js
+└── README.md
+
+---
+### 🚀 Getting Started
+1. Clone the repository
+```
+git clone https://github.com/your-username/DevEvent.git
+cd DevEvent
+```
+2. Install dependencies
+```
+npm install
+or
+yarn install
+```
+3. Run the development server
+```
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 in your browser to see the app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
+### 🧪 Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```npm run dev       # Start development server
+npm run build     # Build for production
+npm run start     # Start production server
+npm run lint      # Run ESLint
+```
 
-## Learn More
+---
+### 🤝 Contributing
 
-To learn more about Next.js, take a look at the following resources:
+1. Contributions are welcome!
+2. Fork the repo
+3. Create your feature branch
+4. Commit your changes
+5. Push to the branch
+6. Open a Pull Request
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 📄 License
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This project is licensed under the MIT License.
+Feel free to use, modify, and distribute.
 
-## Deploy on Vercel
+### ⭐ Support
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+If you like this project, consider giving it a star ⭐
+It helps the project grow and stay visible.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+#### Made by Jass❤️
