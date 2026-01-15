@@ -28,7 +28,7 @@ Whether you're a student, professional, or tech enthusiast, DevEvent makes event
 ---
 ### 🛠️ Tech Stack
 
-**Framework**: Next.js
+**Framework**: Next.js <br>
 **Frontend**: React, HTML, CSS
 **Styling**: CSS / Tailwind (if applicable)
 **Backend**: API routes / External APIs (optional)
