@@ -1,4 +1,4 @@
-import { Schema, model, models, type Model, type InferSchemaType } from 'mongoose'
+import { Schema, model, models, type Model, type InferSchemaType } from 'mongoose';
 
 /* ----------------------------- Helpers ----------------------------- */
 
