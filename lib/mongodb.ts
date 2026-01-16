@@ -42,7 +42,7 @@ export async function connectToDatabase(): Promise<typeof mongoose> {
   if (!cached.promise) {
     // Create and cache the initial connection promise so that concurrent
     // calls share the same in-flight connection attempt.
-    cached.promise = mongoose.connect(MONGODB_URI, {
+    cached.promise = mongoose.connect(MONGODB_URI!, {
       // Recommended options for modern Mongoose / MongoDB drivers.
       autoIndex: true,
     }).then((mongooseInstance) => {
