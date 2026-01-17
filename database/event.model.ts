@@ -1,4 +1,24 @@
-import { Schema, model, models, type Model, type InferSchemaType } from 'mongoose';
+import { Schema, model, models, type Model, type InferSchemaType, type Document } from 'mongoose';
+
+// Typscript interface for Event attributes
+export interface IEvent extends Document {
+  title: string;
+  slug: string;
+  description: string;
+  overview: string;
+  image: string;
+  venue: string;
+  location: string;
+  date: string;
+  time: string;
+  mode: string;
+  audience: string;
+  agenda: string[];
+  organizer: string;
+  tags: string[];
+  createdAt?: Date;
+  updatedAt?: Date;
+}
 
 /* ----------------------------- Helpers ----------------------------- */
 
@@ -10,33 +30,9 @@ const slugify = (value: string): string =>
     .replace(/[^a-z0-9]+/g, '-')
     .replace(/^-+|-+$/g, '')
 
-// Normalize date to ISO string
-const normalizeDateToIso = (value: string): string => {
-  const parsed = new Date(value.trim())
-
-  if (Number.isNaN(parsed.getTime())) {
-    throw new Error('Invalid event date; expected a parsable date string.')
-  }
-
-  return parsed.toISOString()
-}
-
-// 24-hour HH:MM format
-const TIME_PATTERN = /^([01]\d|2[0-3]):([0-5]\d)$/
-
-const normalizeTime = (value: string): string => {
-  const trimmed = value.trim()
-
-  if (!TIME_PATTERN.test(trimmed)) {
-    throw new Error('Invalid event time; expected HH:MM in 24-hour format.')
-  }
-
-  return trimmed
-}
-
 /* ------------------------------ Schema ------------------------------ */
 
-const eventSchema = new Schema(
+const eventSchema = new Schema<IEvent>(
   {
     title: { type: String, required: true, trim: true },
     slug: { type: String, unique: true, index: true },
@@ -95,19 +91,9 @@ eventSchema.pre('save', function () {
       throw new Error(`Event ${field} must contain only non-empty strings.`)
     }
   }
-
   // Slug generation
   if (this.isModified('title') || !this.slug) {
     this.slug = slugify(this.title)
-  }
-
-  // Normalize date & time
-  if (this.isModified('date')) {
-    this.date = normalizeDateToIso(this.date)
-  }
-
-  if (this.isModified('time')) {
-    this.time = normalizeTime(this.time)
   }
 })
 
