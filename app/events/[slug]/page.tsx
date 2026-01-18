@@ -1,6 +1,10 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import BookEvent from "../../../components/BookEvent";
+import { getSimilarEventsBySlug } from "@/lib/actions/event.actions";
+import { IEvent } from '@/database'
+import EventCard from "../../../components/EventCard";
+
 
 {/* ------------------------------- Components ------------------------------- */ }
 const EventDetailItem = ({ icon, alt, label, data }: { icon: string, alt: string, label: string, data: string }) => (
@@ -14,27 +18,29 @@ const EventDetailItem = ({ icon, alt, label, data }: { icon: string, alt: string
 )
 
 const EventAgenda = ({ agendaItems }: { agendaItems: string[] }) => (
-    <div>
-        <h2 className="mb-2">Agenda</h2>
-        <ul className="agenda">
-            {agendaItems.map((item: string, index: number) => (
-                <li key={index}>{item}</li>
-            ))}
-        </ul>
-    </div>
-)
+        <div>
+            <h2 className="mb-2">Agenda</h2>
+            <ul className="agenda">
+                {agendaItems.map((item: string, index: number) => (
+                    <li key={index}>{item}</li>
+                ))}
+            </ul>
+        </div>
+    )
 
-const EventTags = ({ tags }: { tags: string[] }) => (
-    <div className="flex flex-row flex-wrap gap-2 my-4  ">
-        {tags.map((tag: string, index: number) => (
-            <span
-                key={index}
-                className="tag bg-[#0D161A] text-white p-4 rounded-md cursor-pointer">
-                {tag.replace(/\b\w/g, c => c.toUpperCase())}
-            </span>
-        ))}
-    </div>
-)
+const EventTags = ({ tags }: { tags: string[] }) => {
+    return (
+        <div className="flex flex-row flex-wrap gap-2 my-4  ">
+            {tags.map((tag: string, index: number) => (
+                <span
+                    key={index}
+                    className="tag bg-[#0D161A] text-white p-4 rounded-md cursor-pointer">
+                    {tag.replace(/\b\w/g, c => c.toUpperCase())}
+                </span>
+            ))}
+        </div>
+    )
+}
 
 {/* ------------------------------- Main Page ------------------------------- */ }
 const EventDetailsPage = async ({ params }: { params: Promise<{ slug: string }>; }) => {
@@ -62,7 +68,10 @@ const EventDetailsPage = async ({ params }: { params: Promise<{ slug: string }>;
         organizer,
         tags } = event;
 
-    let bookings = 50; // Example static value for available bookings
+    let bookings = 50; // Example static value for available bookings    
+
+    const similarEvents: IEvent[] = await getSimilarEventsBySlug(slug);
+    console.log('Similar Events:', similarEvents);
 
     return (
         <section id="event" className="mx-10">
@@ -96,7 +105,7 @@ const EventDetailsPage = async ({ params }: { params: Promise<{ slug: string }>;
 
                     {/* Agenda */}
                     <section>
-                        <EventAgenda agendaItems={JSON.parse(agenda[0])} />
+                        <EventAgenda agendaItems={agenda} />
                     </section>
 
                     {/* Organizer */}
@@ -107,7 +116,7 @@ const EventDetailsPage = async ({ params }: { params: Promise<{ slug: string }>;
 
                     {/* Tags */}
                     <section>
-                        <EventTags tags={JSON.parse(tags[0])} />
+                        <EventTags tags={tags} />
                     </section>
                 </div>
 
@@ -127,6 +136,18 @@ const EventDetailsPage = async ({ params }: { params: Promise<{ slug: string }>;
                     </div>
                 </aside>
             </div>
+
+            {/* ------------------------------- Similar Events ------------------------------- */}
+            <section className="similar-events my-10">
+                <h2 className="mb-4">Similar Events You May Like</h2>
+                <div className="similar-events-list flex overflow-x-auto gap-4 pb-4">
+                    {similarEvents.length > 0 ? similarEvents.map((simEvent: IEvent, key: number) => (
+                        <EventCard key={simEvent._id} {...simEvent} />
+                    )) : (
+                        <p>No similar events found.</p>
+                    )}
+                </div>
+            </section>
         </section>
     )
 }

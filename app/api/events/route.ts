@@ -18,6 +18,15 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ message: 'Invalid JSON data format.' }, { status: 400 });
         }
 
+        /* ------------------------------- Tags and Agenda ------------------------------- */
+        let tags: string[] = JSON.parse(formData.get('tags') as string);
+        let agenda: string[] = JSON.parse(formData.get('agenda') as string);
+
+        const agendaText = agenda.join(' ');
+        const tagsText = tags.join(' ');
+
+
+        /* ------------------------------- Image Handling ------------------------------- */
         const imageField = formData.get('image');
         if (!imageField) {
             return NextResponse.json({ message: 'Image is required (file or URL).' }, { status: 400 });
@@ -44,7 +53,15 @@ export async function POST(req: NextRequest) {
             return NextResponse.json({ message: 'Image must be a file upload or a valid URL.' }, { status: 400 });
         }
 
-        const createdEvent = await Event.create(event);
+
+        /* ------------------------------- Event Creation ------------------------------- */
+        const createdEvent = await Event.create({
+            ...event,
+            tags: tags,
+            agenda: agenda,
+            agendaText,
+            tagsText
+        });
 
         return NextResponse.json({ message: 'Event Created Successfully', event: createdEvent }, { status: 201 });
     } catch (e) {

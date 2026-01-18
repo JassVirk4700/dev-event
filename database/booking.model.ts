@@ -3,9 +3,11 @@ import { Event } from './event.model'
 
 /* ----------------------------- Types ----------------------------- */
 
-export interface BookingAttrs {
+export interface IBooking extends Document {
   eventId: Types.ObjectId
   email: string
+  createdAt: Date;
+  updatedAt: Date;
 }
 
 /* ---------------------------- Schema ----------------------------- */
@@ -33,7 +35,7 @@ const bookingSchema = new Schema(
     },
   },
   {
-    timestamps: true,
+    timestamps: true, // Auto-generate createdAt and updatedAt
   }
 )
 
@@ -55,8 +57,6 @@ bookingSchema.pre('save', async function () {
 export type BookingDocument = InferSchemaType<typeof bookingSchema>
 export type BookingModel = Model<BookingDocument>
 
-export const Booking =
-  (models.Booking as BookingModel) ||
-  model<BookingDocument, BookingModel>('Booking', bookingSchema)
+export const Booking =  models.Booking || model<BookingDocument, BookingModel>('Booking', bookingSchema)
 
 export default Booking
