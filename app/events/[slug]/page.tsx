@@ -55,7 +55,12 @@ const EventDetailsPage = async ({ params }: { params: Promise<{ slug: string }>;
         { cache: "no-store" }
     );
 
-    if (!request.ok) return notFound(); // Handle 4xx/5xx responses by showing 404 page
+    // BELOW CODE IS GIVING ERROR ON BUILD DUE TO UNDEPLOYED URL FETCH API REQUEST FAIL
+    // if (!request.ok) return notFound(); // Handle 4xx/5xx responses by showing 404 page
+    if (!request.ok) {
+        console.error(await request.text());
+        return [];
+    }
 
     const rawEvent = await request.json(); // Parse the JSON response
     const event = rawEvent.data; // Extract the event data
