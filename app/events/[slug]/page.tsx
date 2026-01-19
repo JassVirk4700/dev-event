@@ -5,6 +5,9 @@ import { getSimilarEventsBySlug } from "@/lib/actions/event.actions";
 import { IEvent } from '@/database'
 import EventCard from "../../../components/EventCard";
 
+// Explicitly making this page dynamic
+export const dynamic = 'force-dynamic';
+
 
 {/* ------------------------------- Components ------------------------------- */ }
 const EventDetailItem = ({ icon, alt, label, data }: { icon: string, alt: string, label: string, data: string }) => (
@@ -18,15 +21,15 @@ const EventDetailItem = ({ icon, alt, label, data }: { icon: string, alt: string
 )
 
 const EventAgenda = ({ agendaItems }: { agendaItems: string[] }) => (
-        <div>
-            <h2 className="mb-2">Agenda</h2>
-            <ul className="agenda">
-                {agendaItems.map((item: string, index: number) => (
-                    <li key={index}>{item}</li>
-                ))}
-            </ul>
-        </div>
-    )
+    <div>
+        <h2 className="mb-2">Agenda</h2>
+        <ul className="agenda">
+            {agendaItems.map((item: string, index: number) => (
+                <li key={index}>{item}</li>
+            ))}
+        </ul>
+    </div>
+)
 
 const EventTags = ({ tags }: { tags: string[] }) => {
     return (
@@ -71,7 +74,6 @@ const EventDetailsPage = async ({ params }: { params: Promise<{ slug: string }>;
     let bookings = 50; // Example static value for available bookings    
 
     const similarEvents: IEvent[] = await getSimilarEventsBySlug(slug);
-    console.log('Similar Events:', similarEvents);
 
     return (
         <section id="event" className="mx-10">
@@ -82,7 +84,7 @@ const EventDetailsPage = async ({ params }: { params: Promise<{ slug: string }>;
             </div>
 
             <div className="details">
-                {/* ------------------------------- Event Left Side ------------------------------- */}
+                {/* ------------------------------- Event Left Side ------------------------D------- */}
                 <div className="content">
                     {/* Image */}
                     <Image src={image} alt={title} width={800} height={400} className="w-full h-auto rounded-xl object-cover sm:max-w-[420px] md:max-w-[600px] lg:max-w-[800px] mx-auto lg:mx-1" />
@@ -132,7 +134,7 @@ const EventDetailsPage = async ({ params }: { params: Promise<{ slug: string }>;
                                 Be the first to book this event!
                             </p>
                         )}
-                        <BookEvent />
+                        <BookEvent eventId={event._id} slug={event.slug} />
                     </div>
                 </aside>
             </div>
@@ -142,7 +144,7 @@ const EventDetailsPage = async ({ params }: { params: Promise<{ slug: string }>;
                 <h2 className="mb-4">Similar Events You May Like</h2>
                 <div className="similar-events-list flex overflow-x-auto gap-4 pb-4">
                     {similarEvents.length > 0 ? similarEvents.map((simEvent: IEvent, key: number) => (
-                        <EventCard key={simEvent._id} {...simEvent} />
+                        <EventCard key={simEvent._id.toString()} {...simEvent} />
                     )) : (
                         <p>No similar events found.</p>
                     )}
