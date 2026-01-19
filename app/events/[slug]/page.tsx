@@ -5,6 +5,9 @@ import { getSimilarEventsBySlug } from "@/lib/actions/event.actions";
 import { IEvent } from '@/database'
 import EventCard from "../../../components/EventCard";
 
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL|| "http://localhost:3000";;
+
+
 // Explicitly making this page dynamic
 export const dynamic = 'force-dynamic';
 
@@ -48,7 +51,7 @@ const EventTags = ({ tags }: { tags: string[] }) => {
 {/* ------------------------------- Main Page ------------------------------- */ }
 const EventDetailsPage = async ({ params }: { params: Promise<{ slug: string }>; }) => {
     const { slug } = await params;
-    const request = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/events/${slug}`,
+    const request = await fetch(`${BASE_URL}/api/events/${slug}`,
         { cache: "no-store" }
     );
 
