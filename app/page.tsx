@@ -2,7 +2,7 @@ import ExploreBtn from '../components/ExploreBtn'
 import EventCard from '../components/EventCard'
 import { IEvent } from '@/database/event.model'
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL;
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL|| "http://localhost:3000";;
 
 
 const Page = async () => {
