@@ -1,16 +1,16 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import BookEvent from "../../../components/BookEvent";
+import BookEvent from "@/components/BookEvent";
 import { getSimilarEventsBySlug } from "@/lib/actions/event.actions";
 import { IEvent } from '@/database'
-import EventCard from "../../../components/EventCard";
+import EventCard from "@/components/EventCard";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL|| "http://localhost:3000";;
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";;
 
 
 // Explicitly making this page dynamic
 export const dynamic = 'force-dynamic';
-
+export const fetchCache = 'force-no-store';
 
 {/* ------------------------------- Components ------------------------------- */ }
 const EventDetailItem = ({ icon, alt, label, data }: { icon: string, alt: string, label: string, data: string }) => (
