@@ -2,12 +2,18 @@ import ExploreBtn from '../components/ExploreBtn'
 import EventCard from '../components/EventCard'
 import { IEvent } from '@/database/event.model'
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL|| "http://localhost:3000";;
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000";;
 
 
 const Page = async () => {
-  
+
   const response = await fetch(`${BASE_URL}/api/events`)
+  
+  // BELOW CODE IS GIVING ERROR ON BUILD DUE TO UNDEPLOYED URL FETCH API REQUEST FAIL
+  if (!response.ok) {
+    console.error(await response.text());
+    return [];
+  }
   const { events } = await response.json();
 
   return (
@@ -16,7 +22,7 @@ const Page = async () => {
       <p className="text-center">Hackathons, Meetups, and Conferences, All in one place.</p>
       <ExploreBtn />
 
-{/* ------------------------------- Featured Events ------------------------------- */}
+      {/* ------------------------------- Featured Events ------------------------------- */}
       <div className='mt-20 space-y-7'>
         <h3>Featured Events</h3>
         <ul className='events list-none' >
